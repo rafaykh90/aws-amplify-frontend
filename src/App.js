@@ -1,8 +1,16 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { withAuthenticator } from 'aws-amplify-react'; 
+import { Auth } from 'aws-amplify';
 
 function App() {
+  Auth.currentAuthenticatedUser()
+    .then(data => {
+      console.log(data);
+    })
+    .catch(err => console.log(err));
+
   return (
     <div className="App">
       <header className="App-header">
@@ -23,4 +31,4 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App, true);
